@@ -23,9 +23,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    parser = argparse.ArgumentParser(
-        description="Dump an IDB B-tree to a textual representation."
-    )
+    parser = argparse.ArgumentParser(description="Dump an IDB B-tree to a textual representation.")
     parser.add_argument(
         "script_path",
         type=str,
@@ -35,12 +33,8 @@ def main(argv=None):
         """,
     )
     parser.add_argument("idbpath", type=str, help="Path to input idb file")
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable debug logging"
-    )
-    parser.add_argument(
-        "-q", "--quiet", action="store_true", help="Disable all output but errors"
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable debug logging")
+    parser.add_argument("-q", "--quiet", action="store_true", help="Disable all output but errors")
     parser.add_argument("--ScreenEA", type=str, help="Prepare value of ScreenEA()")
     args = parser.parse_args(args=argv)
 

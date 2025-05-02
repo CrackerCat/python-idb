@@ -41,7 +41,6 @@ if sys.version_info[0] == 2:
         def install(self):
             sys.meta_path.insert(0, self)
 
-
 elif sys.version_info[0] == 3:
     import sys
     import types

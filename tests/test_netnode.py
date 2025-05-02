@@ -27,12 +27,8 @@ def test_valobj(kernel32_idb, version, bitness, expected):
         assert root.valobj().endswith(b"00bf1bf1b779ce1af41371426821e0c2\x00")
         assert root.valstr().endswith("00bf1bf1b779ce1af41371426821e0c2")
     elif 740 <= version < 760 or version == 500:
-        assert root.valobj().endswith(
-            b"ba1bc09b7bb290656582b4e4d896105caf00825b557ce45621e76741cd5dc262\x00"
-        )
-        assert root.valstr().endswith(
-            "ba1bc09b7bb290656582b4e4d896105caf00825b557ce45621e76741cd5dc262"
-        )
+        assert root.valobj().endswith(b"ba1bc09b7bb290656582b4e4d896105caf00825b557ce45621e76741cd5dc262\x00")
+        assert root.valstr().endswith("ba1bc09b7bb290656582b4e4d896105caf00825b557ce45621e76741cd5dc262")
     else:
         assert root.valobj().endswith(b"kernel32.dll\x00")
         assert root.valstr().endswith("kernel32.dll")

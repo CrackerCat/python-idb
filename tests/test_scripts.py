@@ -36,17 +36,11 @@ def kern32_script_test(scripts, specs=None):
     params = []
     for script in scripts:
         for spec in specs:
-            version, bitness, expected = (
-                spec
-                if isinstance(spec[0], float) or isinstance(spec[0], int)
-                else spec[1]
-            )
+            version, bitness, expected = spec if isinstance(spec[0], float) or isinstance(spec[0], int) else spec[1]
             path, sversion, sbitness = get_kern32_path(version, bitness)
             params.append(pytest.param(path, version, bitness, expected, script))
             ids.append("/".join([sversion, sbitness, script.__name__]))
-    return pytest.mark.parametrize(
-        "kernel32_idb_path, version, bitness, expected, script", params, ids=ids
-    )
+    return pytest.mark.parametrize("kernel32_idb_path, version, bitness, expected, script", params, ids=ids)
 
 
 SlowScripts = [dump_btree, extract_function_names]

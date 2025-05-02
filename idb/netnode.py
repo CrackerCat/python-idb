@@ -92,13 +92,9 @@ def make_key(nodeid, tag=None, index=None, wordsize=4):
         if index is None:
             return b"." + struct.pack(">" + wordformat + "c", nodeid, tag)
         elif index < 0:
-            return b"." + struct.pack(
-                ">" + wordformat + "c" + wordformat.lower(), nodeid, tag, index
-            )
+            return b"." + struct.pack(">" + wordformat + "c" + wordformat.lower(), nodeid, tag, index)
         else:
-            return b"." + struct.pack(
-                ">" + wordformat + "c" + wordformat, nodeid, tag, index
-            )
+            return b"." + struct.pack(">" + wordformat + "c" + wordformat, nodeid, tag, index)
     else:
         raise ValueError("unexpected type of nodeid: " + str(type(nodeid)))
 

@@ -258,9 +258,7 @@ class _Analysis(object):
         # note that order of fields is important:
         #   fields with matching minvers override previously defined fields of the same name
         self._fields_by_name = {
-            f.name: f
-            for f in self.fields
-            if (not f.minver) or (f.minver and idb_version >= f.minver)
+            f.name: f for f in self.fields if (not f.minver) or (f.minver and idb_version >= f.minver)
         }
 
     def _is_address(self, index):
@@ -457,9 +455,7 @@ class Reader(idb.typeinf.TypeString):
         if val == 0xFF:
             val = self.u32(big=True)
         elif val & 0xC0 == 0xC0:
-            val = (
-                ((val & 0x1F) << 24) | (self.u8() << 16) | (self.u8() << 8) | self.u8()
-            )
+            val = ((val & 0x1F) << 24) | (self.u8() << 16) | (self.u8() << 8) | self.u8()
         elif val & 0x80:
             val = ((val & 0x3F) << 8) | self.u8()
         return val
@@ -1174,9 +1170,7 @@ def pairs(l):
 
 Chunk = namedtuple("Chunk", ["effective_address", "length"])
 FunctionParameter = namedtuple("FunctionParameter", ["type", "name"])
-FunctionSignature = namedtuple(
-    "FunctionSignature", ["calling_convention", "rtype", "unk", "parameters"]
-)
+FunctionSignature = namedtuple("FunctionSignature", ["calling_convention", "rtype", "unk", "parameters"])
 StackChangePoint = namedtuple("StackChangePoint", ["effective_address", "change"])
 
 
@@ -1226,9 +1220,7 @@ class Function:
             typedata.deserialize(self.idb.til, ts, names, [])
             inf = Root(self.idb).idainfo
 
-            return idb.typeinf.TInfo(
-                typ, typedata, til=self.idb.til, name=self.get_name(), inf=inf
-            )
+            return idb.typeinf.TInfo(typ, typedata, til=self.idb.til, name=self.get_name(), inf=inf)
         except KeyError:
             return None
 
@@ -1283,7 +1275,7 @@ class Function:
             unpacker = unpack_dqs
         else:
             raise RuntimeError("unexpected wordsize")
-        for (delta, change) in pairs(unpacker(v)):
+        for delta, change in pairs(unpacker(v)):
             offset += delta
             if change & 1:
                 change = change >> 1
@@ -1575,9 +1567,7 @@ EntryPoints = Analysis(
     ],
 )
 
-EntryPoint = namedtuple(
-    "EntryPoint", ["name", "address", "ordinal", "forwarded_symbol"]
-)
+EntryPoint = namedtuple("EntryPoint", ["name", "address", "ordinal", "forwarded_symbol"])
 
 
 def enumerate_entrypoints(db):
@@ -1597,14 +1587,10 @@ def enumerate_entrypoints(db):
     for index, addr in ents.functions.items():
         if index == db.uint(-1):
             break
-        yield EntryPoint(
-            names.get(index), addr, ordinals.get(index), forwarded_symbols.get(index)
-        )
+        yield EntryPoint(names.get(index), addr, ordinals.get(index), forwarded_symbols.get(index))
 
     for index, addr in ents.main_entry.items():
-        yield EntryPoint(
-            names.get(index), addr, ordinals.get(index), forwarded_symbols.get(index)
-        )
+        yield EntryPoint(names.get(index), addr, ordinals.get(index), forwarded_symbols.get(index))
 
 
 ScriptSnippets = Analysis(

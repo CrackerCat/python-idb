@@ -170,9 +170,7 @@ def kern32_test(specs=None):
     params = []
 
     for spec in specs:
-        version, bitness, expected = (
-            spec if isinstance(spec[0], float) or isinstance(spec[0], int) else spec[1]
-        )
+        version, bitness, expected = spec if isinstance(spec[0], float) or isinstance(spec[0], int) else spec[1]
 
         path, sversion, sbitness = get_kern32_path(version, bitness)
         skipped = False
@@ -184,9 +182,7 @@ def kern32_test(specs=None):
             marks = pytest.mark.skip
         elif spec[0] == "if_exists":
             skipped = not os.path.exists(path)
-            marks = pytest.mark.skipif(
-                condition=skipped, reason="not exists idb file: " + path
-            )
+            marks = pytest.mark.skipif(condition=skipped, reason="not exists idb file: " + path)
         else:
             marks = None
 
@@ -199,9 +195,7 @@ def kern32_test(specs=None):
 
         ids.append(sversion + "/" + sbitness)
 
-    return pytest.mark.parametrize(
-        "kernel32_idb,version,bitness,expected", params, ids=ids
-    )
+    return pytest.mark.parametrize("kernel32_idb,version,bitness,expected", params, ids=ids)
 
 
 def kern32_test_v7():

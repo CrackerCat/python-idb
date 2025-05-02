@@ -36,12 +36,8 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    parser = argparse.ArgumentParser(
-        description="Parse and display type information from an IDA Pro database."
-    )
-    parser.add_argument(
-        "idb", type=argparse.FileType("rb"), help="Path to input idb file"
-    )
+    parser = argparse.ArgumentParser(description="Parse and display type information from an IDA Pro database.")
+    parser.add_argument("idb", type=argparse.FileType("rb"), help="Path to input idb file")
     args = parser.parse_args(args=argv)
 
     til = idb.from_buffer(args.idb.read()).til

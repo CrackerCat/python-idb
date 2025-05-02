@@ -644,9 +644,7 @@ class idc:
     SEGPERM_READ = 4  # Read
     SEGPERM_MAXVAL = 7  # (SEGPERM_EXEC + SEGPERM_WRITE + SEGPERM_READ)
 
-    SFL_COMORG = (
-        0x01  # IDP dependent field (IBM PC: if set, ORG directive is not commented out)
-    )
+    SFL_COMORG = 0x01  # IDP dependent field (IBM PC: if set, ORG directive is not commented out)
     SFL_OBOK = 0x02  # orgbase is present? (IDP dependent field)
     SFL_HIDDEN = 0x04  # is the segment hidden?
     SFL_DEBUG = 0x08  # is the segment created for the debugger?
@@ -844,9 +842,7 @@ class idc:
         elif attr == self.SEGATTR_COLOR:
             return self._get_segment(ea).color
         else:
-            raise NotImplementedError(
-                "segment attribute %d not yet implemented" % (attr)
-            )
+            raise NotImplementedError("segment attribute %d not yet implemented" % (attr))
 
     def MinEA(self):
         segs = idb.analysis.Segments(self.idb).segments.values()
@@ -885,9 +881,7 @@ class idc:
     def NextHead(self, ea):
         ea += 1
         flags = self.GetFlags(ea)
-        while (
-            flags is not None and flags != 0 and not self.api.ida_bytes.is_head(flags)
-        ):
+        while flags is not None and flags != 0 and not self.api.ida_bytes.is_head(flags):
             ea += 1
             # TODO: handle Index/KeyError here when we overrun a segment
             flags = self.GetFlags(ea)
@@ -1030,20 +1024,13 @@ class idc:
                 )
         elif procname == "sparcb":
             if bitness == 32:
-                dis = self._load_dis(
-                    capstone.CS_ARCH_SPARC, capstone.CS_MODE_BIG_ENDIAN
-                )
+                dis = self._load_dis(capstone.CS_ARCH_SPARC, capstone.CS_MODE_BIG_ENDIAN)
         elif procname == "sparcl":
             if bitness == 32:
-                dis = self._load_dis(
-                    capstone.CS_ARCH_SPARC, capstone.CS_MODE_LITTLE_ENDIAN
-                )
+                dis = self._load_dis(capstone.CS_ARCH_SPARC, capstone.CS_MODE_LITTLE_ENDIAN)
 
         if dis is None:
-            raise NotImplementedError(
-                "unknown arch %s bit:%s inst_len:%d"
-                % (procname, bitness, len(inst_buf))
-            )
+            raise NotImplementedError("unknown arch %s bit:%s inst_len:%d" % (procname, bitness, len(inst_buf)))
         dis.detail = True
 
         try:
@@ -1294,22 +1281,12 @@ class idc:
     @staticmethod
     def isNum0(flags):
         t = flags & FLAGS.MS_0TYPE
-        return (
-            t == FLAGS.FF_0NUMB
-            or t == FLAGS.FF_0NUMO
-            or t == FLAGS.FF_0NUMD
-            or t == FLAGS.FF_0NUMH
-        )
+        return t == FLAGS.FF_0NUMB or t == FLAGS.FF_0NUMO or t == FLAGS.FF_0NUMD or t == FLAGS.FF_0NUMH
 
     @staticmethod
     def isNum1(flags):
         t = flags & FLAGS.MS_1TYPE
-        return (
-            t == FLAGS.FF_1NUMB
-            or t == FLAGS.FF_1NUMO
-            or t == FLAGS.FF_1NUMD
-            or t == FLAGS.FF_1NUMH
-        )
+        return t == FLAGS.FF_1NUMB or t == FLAGS.FF_1NUMO or t == FLAGS.FF_1NUMD or t == FLAGS.FF_1NUMH
 
     @staticmethod
     def get_optype_flags0(flags):
@@ -1529,11 +1506,7 @@ class ida_bytes:
     def get_item_end(self, ea):
         ea += 1
         flags = self.api.idc.GetFlags(ea)
-        while (
-            flags is not None
-            and not self.api.ida_bytes.is_head(flags)
-            and self.api.idc.SegEnd(ea)
-        ):
+        while flags is not None and not self.api.ida_bytes.is_head(flags) and self.api.idc.SegEnd(ea):
             ea += 1
             flags = self.api.idc.GetFlags(ea)
         return ea
@@ -1919,11 +1892,7 @@ class idaapi:
         Returns:
           int: the address of the final instruction in the basic block. it may be the same as the start.
         """
-        if not is_empty(
-            idb.analysis.get_crefs_from(
-                self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]
-            )
-        ):
+        if not is_empty(idb.analysis.get_crefs_from(self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F])):
             return ea
 
         if not self.api.idc.GetFlags(ea):
@@ -1946,11 +1915,7 @@ class idaapi:
             if not self.api.ida_bytes.is_flow(flags):
                 return last_ea
 
-            if not is_empty(
-                idb.analysis.get_crefs_from(
-                    self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]
-                )
-            ):
+            if not is_empty(idb.analysis.get_crefs_from(self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F])):
                 return ea
 
     def _find_bb_start(self, ea):
@@ -1972,11 +1937,7 @@ class idaapi:
             last_ea = ea
             ea = self.api.idc.PrevHead(ea)
 
-            if not is_empty(
-                idb.analysis.get_crefs_from(
-                    self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]
-                )
-            ):
+            if not is_empty(idb.analysis.get_crefs_from(self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F])):
                 return last_ea
 
             if not self.api.ida_bytes.is_flow(flags):
@@ -1993,9 +1954,7 @@ class idaapi:
 
         # get all the flow xrefs to this instruction.
         # a flow xref is like a fallthrough or jump, not like a call.
-        for xref in idb.analysis.get_crefs_to(
-            self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]
-        ):
+        for xref in idb.analysis.get_crefs_to(self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]):
             yield xref
 
     def _get_flow_succs(self, ea):
@@ -2010,9 +1969,7 @@ class idaapi:
 
         # get all the flow xrefs from this instruction.
         # a flow xref is like a fallthrough or jump, not like a call.
-        for xref in idb.analysis.get_crefs_from(
-            self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]
-        ):
+        for xref in idb.analysis.get_crefs_from(self.idb, ea, types=[idaapi.fl_JN, idaapi.fl_JF, idaapi.fl_F]):
             yield xref
 
     def FlowChart(self, func):
@@ -2083,9 +2040,7 @@ class idaapi:
                     for xref in api.idaapi._get_flow_preds(block.startEA):
                         if xref.frm not in bbs_by_end:
                             pred_start = api.idaapi._find_bb_start(xref.frm)
-                            pred = BasicBlock(
-                                self, pred_start, xref.frm, api.idc.NextHead(xref.frm)
-                            )
+                            pred = BasicBlock(self, pred_start, xref.frm, api.idc.NextHead(xref.frm))
                             bbs_by_start[pred.startEA] = pred
                             bbs_by_end[pred.lastInstEA] = pred
                         else:
@@ -2100,9 +2055,7 @@ class idaapi:
                     for xref in api.idaapi._get_flow_succs(block.lastInstEA):
                         if xref.to not in bbs_by_start:
                             succ_end = api.idaapi._find_bb_end(xref.to)
-                            succ = BasicBlock(
-                                self, xref.to, succ_end, api.idc.NextHead(succ_end)
-                            )
+                            succ = BasicBlock(self, xref.to, succ_end, api.idc.NextHead(succ_end))
                             bbs_by_start[succ.startEA] = succ
                             bbs_by_end[succ.lastInstEA] = succ
                         else:
@@ -2541,9 +2494,7 @@ class idautils:
 
         # calls are not data references.
         # global variables are data references.
-        for xref in idb.analysis.get_drefs_from(
-            self.idb, ea, types=self.ALL_DREF_TYPES
-        ):
+        for xref in idb.analysis.get_drefs_from(self.idb, ea, types=self.ALL_DREF_TYPES):
             yield xref.to
 
     def DataRefsTo(self, ea):
@@ -2806,9 +2757,7 @@ class ida_struct:
         return 0 if len(self._struct_ids) > 0 else self.api.idc.BADADDR
 
     def get_last_struc_idx(self):
-        return (
-            self._struct_ids[-1] if len(self._struct_ids) > 0 else self.api.idc.BADADDR
-        )
+        return self._struct_ids[-1] if len(self._struct_ids) > 0 else self.api.idc.BADADDR
 
     def get_struc(self, id):
         """Get pointer to struct type info."""
@@ -2859,9 +2808,7 @@ class ida_typeinf:
         if not _type or len(_type) == 0:
             return -1
         typ = self.get_named_type(name)
-        if self.get_base_flags(typ.type.base_type) == self.get_base_flags(
-            ord(_type[0])
-        ):
+        if self.get_base_flags(typ.type.base_type) == self.get_base_flags(ord(_type[0])):
             return typ.ordinal
         else:
             return -1

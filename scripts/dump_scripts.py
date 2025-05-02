@@ -19,16 +19,10 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    parser = argparse.ArgumentParser(
-        description="Extract scripts embedded within IDA Pro databases."
-    )
+    parser = argparse.ArgumentParser(description="Extract scripts embedded within IDA Pro databases.")
     parser.add_argument("idbpath", type=str, help="Path to input idb file")
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable debug logging"
-    )
-    parser.add_argument(
-        "-q", "--quiet", action="store_true", help="Disable all output but errors"
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable debug logging")
+    parser.add_argument("-q", "--quiet", action="store_true", help="Disable all output but errors")
     args = parser.parse_args(args=argv)
 
     if args.verbose:
@@ -55,9 +49,7 @@ def main(argv=None):
                     raise ValueError("unexpected script language: " + script.language)
 
                 filename = script.name + ext
-                logger.info(
-                    "writing %s script %s to %s", script.language, script.name, filename
-                )
+                logger.info("writing %s script %s to %s", script.language, script.name, filename)
                 with open(filename, "wb") as f:
                     f.write(script.code.encode("utf-8"))
         except KeyError:

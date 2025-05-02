@@ -21,16 +21,10 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    parser = argparse.ArgumentParser(
-        description="Dump an IDB B-tree to a textual representation."
-    )
+    parser = argparse.ArgumentParser(description="Dump an IDB B-tree to a textual representation.")
     parser.add_argument("idbpath", type=str, help="Path to input idb file")
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable debug logging"
-    )
-    parser.add_argument(
-        "-q", "--quiet", action="store_true", help="Disable all output but errors"
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable debug logging")
+    parser.add_argument("-q", "--quiet", action="store_true", help="Disable all output but errors")
     args = parser.parse_args(args=argv)
 
     if args.verbose:

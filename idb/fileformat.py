@@ -1,6 +1,7 @@
 """
 lots of inspiration from: https://github.com/nlitsme/pyidbutil
 """
+
 import re
 import abc
 import zlib
@@ -762,9 +763,7 @@ class Cursor(object):
             next_page = self.index.get_page(next_page_number)
             while not next_page.is_leaf():
                 self.path.append(next_page)
-                next_page = self.index.get_page(
-                    next_page.get_entry(next_page.entry_count - 1).page
-                )
+                next_page = self.index.get_page(next_page.get_entry(next_page.entry_count - 1).page)
 
             self.path.append(next_page)
             self.entry = next_page.get_entry(next_page.entry_count - 1)
@@ -962,9 +961,7 @@ class ID1(vstruct.VStruct):
         for i in range(self.segment_count):
             segment = self._segments[i]
             segment_byte_count = segment.end - segment.start
-            segment_length = (
-                4 * segment_byte_count
-            )  # each flag entry is a uint32 on all platforms
+            segment_length = 4 * segment_byte_count  # each flag entry is a uint32 on all platforms
             self.segments.append(ID1.SegmentDescriptor(segment, offset))
             offset += segment_length
         offset = 0x14 + (self.segment_count * (2 * self.wordsize))

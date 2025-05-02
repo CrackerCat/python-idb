@@ -235,27 +235,15 @@ def test_function(kernel32_idb, version, bitness, expected):
     _get_fn_signature = functools.partial(get_fn_signature, kernel32_idb)
 
     if version >= 760:
-        assert (
-            _get_fn_signature(0x68901551)
-            == "void (__fastcall @__security_check_cookie@4)(uintptr_t StackCookie)",
-        )
-        assert (
-            _get_fn_signature(0x68901637)
-            == "void* (__cdecl memset)(void*, int Val, size_t Size)"
-        )
+        assert (_get_fn_signature(0x68901551) == "void (__fastcall @__security_check_cookie@4)(uintptr_t StackCookie)",)
+        assert _get_fn_signature(0x68901637) == "void* (__cdecl memset)(void*, int Val, size_t Size)"
         assert (
             _get_fn_signature(0x689031AE)
             == "int (__thiscall ?NotifyLoadStringResource@CMessageMapper@FSPErrorMessages@@QAEJPAUHINSTANCE__@@IPBGKPAPAX@Z)(FSPErrorMessages::CMessageMapper* this, HINSTANCE CriticalSection, unsigned int, unsigned int16*, unsigned int, void**)",
         )
     elif 760 > version >= 730:
-        assert (
-            _get_fn_signature(0x68901551)
-            == "void (__fastcall @__security_check_cookie@4)(uintptr_t StackCookie)",
-        )
-        assert (
-            _get_fn_signature(0x68901637)
-            == "void* (__cdecl _memset)(void*, int Val, size_t Size)"
-        )
+        assert (_get_fn_signature(0x68901551) == "void (__fastcall @__security_check_cookie@4)(uintptr_t StackCookie)",)
+        assert _get_fn_signature(0x68901637) == "void* (__cdecl _memset)(void*, int Val, size_t Size)"
         assert (
             _get_fn_signature(0x689031AE)
             == "int (__thiscall ?NotifyLoadStringResource@CMessageMapper@FSPErrorMessages@@QAEJPAUHINSTANCE__@@IPBGKPAPAX@Z)(FSPErrorMessages::CMessageMapper* this, HINSTANCE CriticalSection, unsigned int, unsigned int16*, unsigned int, void**)",
@@ -265,10 +253,7 @@ def test_function(kernel32_idb, version, bitness, expected):
             _get_fn_signature(0x68936AEC)
             == "int (__stdcall _BasepProcessInvalidImage@84)(NTSTATUS Status, int, int, int, int, int, int, int, int, int, int, int, int, int, PUNICODE_STRING, int, int, int, int, int, int)",
         )
-        assert (
-            _get_fn_signature(0x68901637)
-            == "void* (__cdecl _memset)(void* Dst, int Val, size_t Size)"
-        )
+        assert _get_fn_signature(0x68901637) == "void* (__cdecl _memset)(void* Dst, int Val, size_t Size)"
         assert (
             _get_fn_signature(0x689031AE)
             == "int (__thiscall ?NotifyLoadStringResource@CMessageMapper@FSPErrorMessages@@QAEJPAUHINSTANCE__@@IPBGKPAPAX@Z)(FSPErrorMessages::CMessageMapper* this, HINSTANCE CriticalSection, unsigned int, unsigned int16*, unsigned int, void**)",
@@ -278,37 +263,19 @@ def test_function(kernel32_idb, version, bitness, expected):
             _get_fn_signature(0x68936AEC)
             == "int (__cdecl BasepProcessInvalidImage)(NTSTATUS NtStatus, int, int, int, int, int, int, int, int, int, int, int, int, int, PUNICODE_STRING, int, int, int, int, int, int)",
         )
-        assert (
-            _get_fn_signature(0x68904AED)
-            == "int (__thiscall sub_68904AED)(HANDLE FileHandle, int, int)"
-        )
+        assert _get_fn_signature(0x68904AED) == "int (__thiscall sub_68904AED)(HANDLE FileHandle, int, int)"
     elif version > 630:
-        assert (
-            _get_fn_signature(0x68915529)
-            == "int (__cdecl sub_68915529)(LPCWSTR lpString1, int, int)"
-        )
-        assert (
-            _get_fn_signature(0x68904AED)
-            == "int (__thiscall sub_68904AED)(HANDLE FileHandle, int, int)"
-        )
+        assert _get_fn_signature(0x68915529) == "int (__cdecl sub_68915529)(LPCWSTR lpString1, int, int)"
+        assert _get_fn_signature(0x68904AED) == "int (__thiscall sub_68904AED)(HANDLE FileHandle, int, int)"
     elif 630 == version:
-        assert (
-            _get_fn_signature(0x68915529)
-            == "int (__cdecl sub_68915529)(PCNZWCH Buf1, int, int)"
-        )
-        assert (
-            _get_fn_signature(0x689172CF)
-            == "int (__thiscall sub_689172CF)(DWORD Size, int, int, int, int)"
-        )
+        assert _get_fn_signature(0x68915529) == "int (__cdecl sub_68915529)(PCNZWCH Buf1, int, int)"
+        assert _get_fn_signature(0x689172CF) == "int (__thiscall sub_689172CF)(DWORD Size, int, int, int, int)"
     elif version == 500:
         assert (
             _get_fn_signature(0x68903158)
             == "int (__fastcall _BasepNotifyLoadStringResource@16)(int, int, int, int, int, int)",
         )
-        assert (
-            _get_fn_signature(0x68906511)
-            == "int (__cdecl _StringCbPrintfW)(wchar_t*, int, wchar_t*, int8)"
-        )
+        assert _get_fn_signature(0x68906511) == "int (__cdecl _StringCbPrintfW)(wchar_t*, int, wchar_t*, int8)"
 
 
 def test_function_usercall():
@@ -425,30 +392,20 @@ def test_stack_change_points(kernel32_idb, version, bitness, expected):
 @kern32_test()
 def test_xrefs(kernel32_idb, version, bitness, expected):
     assert lpluck("to", idb.analysis.get_crefs_from(kernel32_idb, 0x68901695)) == []
-    assert lpluck("to", idb.analysis.get_crefs_from(kernel32_idb, 0x6890169E)) == [
-        0x68906156
-    ]
+    assert lpluck("to", idb.analysis.get_crefs_from(kernel32_idb, 0x6890169E)) == [0x68906156]
 
     assert lpluck("frm", idb.analysis.get_crefs_to(kernel32_idb, 0x6890169E)) == []
-    assert lpluck("frm", idb.analysis.get_crefs_to(kernel32_idb, 0x68906156)) == [
-        0x6890169E
-    ]
+    assert lpluck("frm", idb.analysis.get_crefs_to(kernel32_idb, 0x68906156)) == [0x6890169E]
 
     # .text:689016BA 004 81 EC 14 02 00 00                       sub     esp, 214h
     # .text:689016C0 218 A1 70 B3 9D 68                          mov     eax, ___security_cookie
     # .text:689016C5 218 33 C5                                   xor     eax, ebp
     security_cookie = 0x689DB370
-    assert lpluck("to", idb.analysis.get_drefs_from(kernel32_idb, 0x689016C0)) == [
-        security_cookie
-    ]
+    assert lpluck("to", idb.analysis.get_drefs_from(kernel32_idb, 0x689016C0)) == [security_cookie]
     assert lpluck("frm", idb.analysis.get_drefs_to(kernel32_idb, 0x689016C0)) == []
 
-    assert 0x689016C0 in pluck(
-        "frm", idb.analysis.get_drefs_to(kernel32_idb, security_cookie)
-    )
-    assert (
-        lpluck("to", idb.analysis.get_drefs_from(kernel32_idb, security_cookie)) == []
-    )
+    assert 0x689016C0 in pluck("frm", idb.analysis.get_drefs_to(kernel32_idb, security_cookie))
+    assert lpluck("to", idb.analysis.get_drefs_from(kernel32_idb, security_cookie)) == []
 
 
 @pytest.mark.skipif(six.PY2, reason="it consumes too much memory")

@@ -12,10 +12,7 @@ def test_armel_disasm():
 
     with idb.from_file(idbpath) as db:
         api = idb.IDAPython(db)
-        assert (
-            api.idc.GetDisasm(0x00002598)
-            == "push\t{r4, r5, r6, r7, r8, sb, sl, fp, lr}"
-        )
+        assert api.idc.GetDisasm(0x00002598) == "push\t{r4, r5, r6, r7, r8, sb, sl, fp, lr}"
         assert api.idc.GetDisasm(0x00012010) == "b\t#0x12014"
 
 

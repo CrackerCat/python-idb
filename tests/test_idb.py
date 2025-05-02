@@ -67,9 +67,7 @@ def do_test_compressed(db):
         if section is None:
             continue
         assert section.header.is_compressed is True
-        assert (
-            section.header.compression_method == idb.fileformat.COMPRESSION_METHOD.ZLIB
-        )
+        assert section.header.compression_method == idb.fileformat.COMPRESSION_METHOD.ZLIB
 
     # should be no ValueErrors here.
     assert db.validate() is True
@@ -793,9 +791,7 @@ def test_til_affix():
         assert derive.type.is_struct()
         derive_members = derive.type.type_details.members
         assert derive_members[0].is_baseclass()
-        assert (
-            derive_members[0].type.get_final_tinfo().get_name() == base.type.get_name()
-        )
+        assert derive_members[0].type.get_final_tinfo().get_name() == base.type.get_name()
 
         assert derive_members[1].type.is_int()
         assert derive_members[2].type.is_int()
@@ -863,10 +859,7 @@ def test_til_affix():
         t209 = types[208]
         assert t209.name == "PTP_CLEANUP_GROUP_CANCEL_CALLBACK"
         assert t209.type.is_funcptr()
-        assert (
-            t209.type.get_typestr()
-            == "void (__fastcall *PTP_CLEANUP_GROUP_CANCEL_CALLBACK)(void*, void*)"
-        )
+        assert t209.type.get_typestr() == "void (__fastcall *PTP_CLEANUP_GROUP_CANCEL_CALLBACK)(void*, void*)"
 
         # 79
         # _TP_CALLBACK_ENVIRON_V3::<unnamed_type_u>::<unnamed_type_s>

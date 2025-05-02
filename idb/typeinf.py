@@ -1,6 +1,7 @@
 """
 migrate from ida sdk and https://github.com/aerosoul94/tilutil
 """
+
 import zlib
 from abc import ABCMeta, abstractmethod
 
@@ -203,9 +204,7 @@ global_inf = None
 
 
 class TInfo:
-    def __init__(
-        self, base_type=BT_UNK, type_details=None, til=None, name=None, inf=None
-    ):
+    def __init__(self, base_type=BT_UNK, type_details=None, til=None, name=None, inf=None):
         self.base_type = base_type
         self.flags = 0
         self.type_details = type_details
@@ -219,9 +218,7 @@ class TInfo:
             nex = self.get_next_tinfo()
             if nex.base_type == 0:
                 return (
-                    "#{}".format(self.type_details.ordinal)
-                    if self.type_details.is_ordref
-                    else self.type_details.name
+                    "#{}".format(self.type_details.ordinal) if self.type_details.is_ordref else self.type_details.name
                 )
             else:
                 return nex.get_name()
@@ -453,16 +450,10 @@ class TInfo:
                         typestr += " " * indent
                         typename = m.type.get_typename()
                         if m.type.is_funcptr():
-                            typestr += (
-                                typename.replace("{name}", m.name)
-                                if m.name is not None
-                                else typename
-                            )
+                            typestr += typename.replace("{name}", m.name) if m.name is not None else typename
                             typestr += ";\n"
                         elif m.type.is_decl_bitfield():
-                            typestr += "{} {} : {};\n".format(
-                                typename, m.name, m.type.type_details.width
-                            )
+                            typestr += "{} {} : {};\n".format(typename, m.name, m.type.type_details.width)
                         else:
                             typestr += "{} {};\n".format(typename, m.name)
                     typestr += "}"
@@ -784,9 +775,7 @@ class ErrorTInfo:
 
 
 def create_tinfo(til, type_info, fields=None, fieldcmts=None, name=None, inf=None):
-    type_string = (
-        type_info if isinstance(type_info, TypeString) else TypeString(type_info)
-    )
+    type_string = type_info if isinstance(type_info, TypeString) else TypeString(type_info)
     typ = type_string.peek_u8()
     tinfo = TInfo(typ, til=til, name=name, inf=inf)
     if is_typeid_last(typ) or get_base_type(typ) == BT_RESERVED:

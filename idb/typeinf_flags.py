@@ -632,9 +632,7 @@ def is_type_typedef(t):
 
 
 def is_type_sue(t):
-    return is_type_complex(t) and not is_type_typedef(
-        t
-    )  # < Is the type a struct/union/enum?
+    return is_type_complex(t) and not is_type_typedef(t)  # < Is the type a struct/union/enum?
 
 
 def is_type_struct(t):
@@ -666,37 +664,27 @@ def is_type_int(bt):
 
 # Does the type specify a 128-bit value? (signed or unsigned, see \ref tf_int)
 def is_type_int128(t):
-    return get_full_type(t) == (BT_INT128 | BTMT_UNKSIGN) or get_full_type(t) == (
-        BT_INT128 | BTMT_SIGNED
-    )
+    return get_full_type(t) == (BT_INT128 | BTMT_UNKSIGN) or get_full_type(t) == (BT_INT128 | BTMT_SIGNED)
 
 
 # Does the type specify a 64-bit value? (signed or unsigned, see \ref tf_int)
 def is_type_int64(t):
-    return get_full_type(t) == (BT_INT64 | BTMT_UNKSIGN) or get_full_type(t) == (
-        BT_INT64 | BTMT_SIGNED
-    )
+    return get_full_type(t) == (BT_INT64 | BTMT_UNKSIGN) or get_full_type(t) == (BT_INT64 | BTMT_SIGNED)
 
 
 # Does the type specify a 32-bit value? (signed or unsigned, see \ref tf_int)
 def is_type_int32(t):
-    return get_full_type(t) == (BT_INT32 | BTMT_UNKSIGN) or get_full_type(t) == (
-        BT_INT32 | BTMT_SIGNED
-    )
+    return get_full_type(t) == (BT_INT32 | BTMT_UNKSIGN) or get_full_type(t) == (BT_INT32 | BTMT_SIGNED)
 
 
 # Does the type specify a 16-bit value? (signed or unsigned, see \ref tf_int)
 def is_type_int16(t):
-    return get_full_type(t) == (BT_INT16 | BTMT_UNKSIGN) or get_full_type(t) == (
-        BT_INT16 | BTMT_SIGNED
-    )
+    return get_full_type(t) == (BT_INT16 | BTMT_UNKSIGN) or get_full_type(t) == (BT_INT16 | BTMT_SIGNED)
 
 
 # Does the type specify a char value? (signed or unsigned, see \ref tf_int)
 def is_type_char(t):
-    return get_full_type(t) == (BT_INT8 | BTMT_CHAR) or get_full_type(t) == (
-        BT_INT8 | BTMT_SIGNED
-    )
+    return get_full_type(t) == (BT_INT8 | BTMT_CHAR) or get_full_type(t) == (BT_INT8 | BTMT_SIGNED)
 
 
 # Is the type a pointer, array, or function type?

@@ -15,7 +15,6 @@ if six.PY2:
         #     bytes(memoryview('foo')) == "<memoryview ...>"
         return buf
 
-
 else:
 
     def memview(buf):

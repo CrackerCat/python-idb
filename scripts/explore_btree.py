@@ -65,9 +65,7 @@ class BTreeExplorer(cmd.Cmd):
             print("leaf: false")
             rows.append(("", "ppointer", hex(page.ppointer)))
             for i, entry in enumerate(page.get_entries()):
-                rows.append(
-                    (hex(i), render_key(entry.key, self.db.wordsize), hex(entry.page))
-                )
+                rows.append((hex(i), render_key(entry.key, self.db.wordsize), hex(entry.page)))
 
         print(tabulate.tabulate(rows, headers=["entry", "key", "page number"]))
 
@@ -106,10 +104,7 @@ class BTreeExplorer(cmd.Cmd):
 
         target = int(part, 0x10)
 
-        if not (
-            target == page.ppointer
-            or target in map(lambda e: e.page, page.get_entries())
-        ):
+        if not (target == page.ppointer or target in map(lambda e: e.page, page.get_entries())):
             print("error: invalid page number.")
             return
 
@@ -163,16 +158,10 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    parser = argparse.ArgumentParser(
-        description="Interactively explore an IDB B-tree like a file system."
-    )
+    parser = argparse.ArgumentParser(description="Interactively explore an IDB B-tree like a file system.")
     parser.add_argument("idbpath", type=str, help="Path to input idb file")
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable debug logging"
-    )
-    parser.add_argument(
-        "-q", "--quiet", action="store_true", help="Disable all output but errors"
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable debug logging")
+    parser.add_argument("-q", "--quiet", action="store_true", help="Disable all output but errors")
     args = parser.parse_args(args=argv)
 
     if args.verbose:

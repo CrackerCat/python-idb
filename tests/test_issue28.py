@@ -37,7 +37,4 @@ def test_issue28():
             2,
             2,
             2,
-        ] == [
-            api.idc.GetSegmentAttr(s, api.idc.SEGATTR_BITNESS)
-            for s in api.idautils.Segments()
-        ]
+        ] == [api.idc.GetSegmentAttr(s, api.idc.SEGATTR_BITNESS) for s in api.idautils.Segments()]
