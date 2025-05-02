@@ -37,7 +37,7 @@ def as_unix_timestamp(buf, wordsize=None):
     parse unix timestamp bytes into a timestamp.
     """
     q = struct.unpack_from("<I", buf, 0x0)[0]
-    return datetime.datetime.fromtimestamp(q, datetime.UTC)
+    return datetime.datetime.fromtimestamp(q, datetime.timezone.utc)
 
 
 def as_md5(buf, wordsize=None):
