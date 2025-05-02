@@ -1,8 +1,9 @@
-import functools
 import re
+import functools
+
+from fixtures import *
 
 import idb.analysis
-from fixtures import *
 from idb.typeinf_flags import *
 
 try:

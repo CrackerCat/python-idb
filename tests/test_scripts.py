@@ -3,20 +3,21 @@ from pathlib import Path
 from contextlib import contextmanager
 
 import pytest
-
 from fixtures import DefaultKern32Specs, get_kern32_path
+
 CD = Path(__file__).parent
 ROOT = CD.parent
 sys.path.append(str(ROOT))
 from scripts import (
+    dump_user,
     dump_btree,
     dump_types,
-    dump_user,
-    dump_scripts,
-    extract_function_names,
     extract_md5,
+    dump_scripts,
     extract_version,
+    extract_function_names,
 )
+
 sys.path.remove(str(ROOT))
 
 

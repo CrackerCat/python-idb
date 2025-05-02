@@ -1,5 +1,6 @@
-import idb.netnode
 from fixtures import *
+
+import idb.netnode
 
 debug = pytest.mark.skipif(not rundebug, reason="need --rundebug option to run")
 

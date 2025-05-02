@@ -5,13 +5,13 @@ Extract the names of functions within the given IDA Pro database.
 author: Willi Ballenthin
 email: willi.ballenthin@gmail.com
 """
-import argparse
-import logging
 import sys
+import logging
+import argparse
 
 import idb
-import idb.analysis
 import idb.netnode
+import idb.analysis
 
 logger = logging.getLogger(__name__)
 

@@ -13,10 +13,10 @@ author: Willi Ballenthin <william.ballenthin@fireeye.com>
 import logging
 from collections import namedtuple
 
-import ida_funcs
+import idc
 import idaapi
 import idautils
-import idc
+import ida_funcs
 
 logger = logging.getLogger(__name__)
 

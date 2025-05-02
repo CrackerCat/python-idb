@@ -1,8 +1,8 @@
 import os
 import os.path
 
-import pytest
 import six
+import pytest
 
 import idb
 

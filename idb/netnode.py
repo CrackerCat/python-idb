@@ -1,5 +1,5 @@
-import logging
 import struct
+import logging
 from collections import namedtuple
 
 import six

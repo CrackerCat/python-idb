@@ -5,9 +5,9 @@ some documentation
 author: Willi Ballenthin
 email: willi.ballenthin@gmail.com
 """
-import argparse
-import logging
 import sys
+import logging
+import argparse
 
 import hexdump
 

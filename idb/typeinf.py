@@ -4,8 +4,8 @@ migrate from ida sdk and https://github.com/aerosoul94/tilutil
 import zlib
 from abc import ABCMeta, abstractmethod
 
-from cached_property import cached_property
 from vstruct import VStruct
+from cached_property import cached_property
 from vstruct.primitives import *
 
 from idb.typeinf_flags import *

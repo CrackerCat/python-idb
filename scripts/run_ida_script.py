@@ -5,11 +5,11 @@ some documentation
 author: Willi Ballenthin
 email: willi.ballenthin@gmail.com
 """
-import argparse
+import sys
+import shlex
 import logging
 import os.path
-import shlex
-import sys
+import argparse
 
 import idb
 import idb.shim

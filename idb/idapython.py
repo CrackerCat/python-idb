@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-import collections
-import logging
 import os
 import re
 import struct
+import logging
 import weakref
+import collections
 
 import six
 
-from idb.analysis import StructMember, Struct
 from idb.netnode import Netnode
 from idb.typeinf import TIL
+from idb.analysis import Struct, StructMember
 
 if six.PY2:
     import functools32 as functools
@@ -1072,7 +1072,7 @@ class idc:
             return ""
 
     def get_operand_type(self, ea, n):
-        from capstone import CS_OP_INVALID, CS_OP_REG, CS_OP_MEM, CS_OP_IMM
+        from capstone import CS_OP_IMM, CS_OP_MEM, CS_OP_REG, CS_OP_INVALID
 
         op = self._disassemble(ea)
         opnds = op.operands

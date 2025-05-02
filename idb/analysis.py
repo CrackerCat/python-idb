@@ -1,10 +1,10 @@
+import types
+import logging
 import binascii
 import datetime
 import itertools
-import logging
-import types
-from collections import Counter, namedtuple
 from random import randint
+from collections import Counter, namedtuple
 
 import six
 import vstruct

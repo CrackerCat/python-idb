@@ -1,12 +1,12 @@
-import argparse
-import json
 import sys
+import json
+import argparse
 
 from vstruct import VStruct
 from vstruct.primitives import v_prim
 
 import idb
-from idb.typeinf import TILBucket, TILTypeInfo, TInfo
+from idb.typeinf import TInfo, TILBucket, TILTypeInfo
 
 
 class TILEncoder(json.JSONEncoder):

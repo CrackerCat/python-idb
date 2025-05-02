@@ -5,10 +5,10 @@ Interactively explore an IDB B-Tree like a file system.
 author: Willi Ballenthin
 email: willi.ballenthin@gmail.com
 """
-import argparse
 import cmd
-import logging
 import sys
+import logging
+import argparse
 
 import hexdump
 import tabulate

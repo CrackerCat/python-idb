@@ -5,12 +5,12 @@ Parse and display license information from an IDA Pro database.
 author: Willi Ballenthin
 email: willi.ballenthin@gmail.com
 """
-import argparse
-import datetime
-import logging
-import struct
 import sys
+import struct
+import logging
+import argparse
 import binascii
+import datetime
 
 from vstruct.primitives import v_zstr_utf8
 

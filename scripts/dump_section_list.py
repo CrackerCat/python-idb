@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
+import idc
 import idaapi
 import idautils
-import idc
 
 
 def print_section_list():

@@ -1,11 +1,11 @@
 """
 lots of inspiration from: https://github.com/nlitsme/pyidbutil
 """
-import abc
-import functools
-import logging
 import re
+import abc
 import zlib
+import logging
+import functools
 from collections import namedtuple
 
 import vstruct
@@ -13,8 +13,8 @@ from vstruct.primitives import *
 
 import idb
 import idb.netnode
-from idb.analysis import Root
 from idb.typeinf import TIL
+from idb.analysis import Root
 
 try:
     from re import fullmatch

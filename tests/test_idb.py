@@ -1,8 +1,9 @@
 import binascii
 
-import idb.fileformat
-import idb.netnode
 from fixtures import *
+
+import idb.netnode
+import idb.fileformat
 
 
 def h2b(somehex):
