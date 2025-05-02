@@ -77,7 +77,6 @@ The target script `yara_fn.py` has only been slightly modified:
     - `Functions`
     - `FlowChart` (basic blocks)
     - lots and lots of flags
-  - Python 2.7 & 3.x compatibility
   - zlib-packed idb/i64 files
 
 ## what will never work
@@ -88,11 +87,11 @@ The target script `yara_fn.py` has only been slightly modified:
 ## getting started
 
 python-idb is a pure-Python library, with the exception of Capstone (required only when calling disassembly APIs).
-You can install it via pip or `setup.py install`, both of which should handle depedency resolution:
+You can install it via pip:
 
 ```
+ $ pip install python-idb
  $ cd ~/Downloads/python-idb/
- $ python setup.py install
  $ python scripts/run_ida_script.py  ~/tools/yara_fn.py  ~/Downloads/kernel32.idb
    ... profit! ...
 ```
