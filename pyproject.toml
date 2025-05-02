@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-idb"
-version = "0.8.0a0"
+version = "0.8.0"
 description = "Pure Python parser for IDA Pro databases (.idb files)"
 readme = "readme.md"
 authors = [
