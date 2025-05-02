@@ -1,5 +1,0 @@
-flake8
-capstone
-pytest-cov
-pytest
-black

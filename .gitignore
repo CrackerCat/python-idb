@@ -110,3 +110,5 @@ ENV/
 *.nam
 *.til
 .idea/
+.direnv
+.envrc
