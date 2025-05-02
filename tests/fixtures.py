@@ -21,42 +21,42 @@ except:
 CD = os.path.dirname(__file__)
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def empty_idb():
     path = os.path.join(CD, "data", "empty", "empty.idb")
     with idb.from_file(path) as db:
         yield db
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def kernel32_idb():
     path = os.path.join(CD, "data", "v6.95", "x32", "kernel32.idb")
     with idb.from_file(path) as db:
         yield db
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def small_idb():
     path = os.path.join(CD, "data", "small", "small-colored.idb")
     with idb.from_file(path) as db:
         yield db
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def compressed_idb():
     path = os.path.join(CD, "data", "compressed", "kernel32.idb")
     with idb.from_file(path) as db:
         yield db
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def compressed_i64():
     path = os.path.join(CD, "data", "compressed", "kernel32.i64")
     with idb.from_file(path) as db:
         yield db
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def elf_idb():
     path = os.path.join(CD, "data", "elf", "ls.idb")
     with idb.from_file(path) as db:

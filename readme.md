@@ -53,7 +53,7 @@ The target script `yara_fn.py` has only been slightly modified:
 
 ## what works
 
-  - ~250 unit tests that demonstrate functionality including file format, B-tree, analysis, and idaapi features.
+  - ~1600 unit tests that demonstrate functionality including file format, B-tree, analysis, and idaapi features.
   - read-only parsing of .idb and .i64 files from IDA Pro v5.0 to v7.5
     - extraction of file sections
     - B-tree lookups and queries (ID0 section)

@@ -54,7 +54,7 @@ def test_root(kernel32_idb, version, bitness, expected):
 def test_root_timestamp(kernel32_idb, version, bitness, expected):
     root = idb.analysis.Root(kernel32_idb)
     actual = root.created.isoformat()
-    pattern = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}"
+    pattern = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+00:00"
     assert fullmatch(pattern, actual) is not None
 
 

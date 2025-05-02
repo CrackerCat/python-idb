@@ -75,8 +75,8 @@ def parse_user_data(buf):
 
     return {
         # unknown if these are in UTC or not. right now, assuming so.
-        "ts1": datetime.datetime.utcfromtimestamp(ts1),
-        "ts2": datetime.datetime.utcfromtimestamp(ts2),
+        "ts1": datetime.datetime.fromtimestamp(ts1, datetime.UTC),
+        "ts2": datetime.datetime.fromtimestamp(ts2, datetime.UTC),
         "id": id,
         "name": name,
     }

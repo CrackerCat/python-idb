@@ -1,8 +1,13 @@
+import sys
+from pathlib import Path
 from contextlib import contextmanager
 
 import pytest
 
 from fixtures import DefaultKern32Specs, get_kern32_path
+CD = Path(__file__).parent
+ROOT = CD.parent
+sys.path.append(str(ROOT))
 from scripts import (
     dump_btree,
     dump_types,
@@ -12,6 +17,7 @@ from scripts import (
     extract_md5,
     extract_version,
 )
+sys.path.remove(str(ROOT))
 
 
 @contextmanager
